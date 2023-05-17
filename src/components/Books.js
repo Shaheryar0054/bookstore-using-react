@@ -1,11 +1,22 @@
 import React from 'react';
-import Book from './Book';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeBook } from '../redux/books/booksSlice';
 
-export default function Books() {
+function Books() {
+  const { books } = useSelector((store) => store.books);
+  const dispatch = useDispatch();
+
   return (
     <div>
-      <Book title="To Kill a Mockingbird" author="Harper Lee" />
-      <Book title="Pride and Prejudice" author="Jane Austen" />
+      {books.map((book) => (
+        <div key={book.item_id}>
+          <h3>{book.title}</h3>
+          <p>{book.author}</p>
+          <button type="submit" onClick={() => { dispatch(removeBook(book.item_id)); }}>Remove</button>
+        </div>
+      ))}
     </div>
   );
 }
+
+export default Books;
