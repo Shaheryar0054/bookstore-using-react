@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeBook, getBooks, deleteBook } from '../redux/books/booksSlice';
+import { getBooks, deleteBook } from '../redux/books/booksSlice';
 
 const Books = () => {
   const dispatch = useDispatch();
@@ -45,7 +45,6 @@ const Books = () => {
             <button
               type="button"
               onClick={() => {
-                dispatch(removeBook(book.item_id));
                 dispatch(deleteBook(book.item_id));
               }}
             >

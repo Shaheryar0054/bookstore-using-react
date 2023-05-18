@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk, isRejectedWithValue } from '@reduxjs/toolkit';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import axios from 'axios';
 
 const url = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/uFTOo1ZiHZevhaBLYXOR/books';
@@ -10,12 +9,12 @@ const initialState = {
   error: null,
 };
 
-export const postBooks = createAsyncThunk('books/postBooks', async (book) => {
+export const postBooks = createAsyncThunk('books/postBooks', async (book, thunkAPI) => {
   try {
-    const result = await axios.post(url, book);
-    return result.data;
+    await axios.post(url, book);
+    return book;
   } catch (error) {
-    return isRejectedWithValue(error.message);
+    return thunkAPI.rejectWithValue(error.message);
   }
 });
 
@@ -45,12 +44,9 @@ const bookSlice = createSlice({
       state.books.push(action.payload);
     },
     removeBook: (state, action) => {
-      const newState = { ...state };
-      newState.books = state.books.filter((item) => item.item_id !== action.payload);
-      return newState;
+      state.books = state.books.filter((item) => item.item_id !== action.payload);
     },
   },
-  /* eslint-disable no-param-reassign */
   extraReducers: (builder) => {
     builder
       .addCase(getBooks.pending, (state) => {
@@ -65,6 +61,12 @@ const bookSlice = createSlice({
       .addCase(getBooks.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
+      })
+      .addCase(postBooks.fulfilled, (state, action) => {
+        state.books.push(action.payload);
+      })
+      .addCase(deleteBook.fulfilled, (state, action) => {
+        state.books = state.books.filter((book) => book.item_id !== action.payload);
       });
   },
 });

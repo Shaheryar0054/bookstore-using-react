@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addBook, postBooks } from '../redux/books/booksSlice';
+import { postBooks } from '../redux/books/booksSlice';
 
 const Form = () => {
   const initial = {
@@ -19,7 +19,8 @@ const Form = () => {
     }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = (e) => {
+    e.preventDefault(); // prevent default form submission
     if (state.title.trim() !== '' && state.author.trim() !== '') {
       const book = {
         title: state.title,
@@ -28,25 +29,20 @@ const Form = () => {
         item_id: `item${books.length + 1}`,
       };
 
-      try {
-        await dispatch(postBooks(book));
-        dispatch(addBook(book));
+      dispatch(postBooks(book)).then(() => {
         setState(initial);
-      } catch (error) {
-        error(error);
-      }
+      });
     }
   };
 
   return (
     <>
       <h3>ADD NEW BOOK</h3>
-      <form action="submit">
+      <form onSubmit={handleSubmit}>
         <input type="text" placeholder="Book title" onChange={handleChange} name="title" value={state.title} />
         <input type="text" placeholder="Author" onChange={handleChange} name="author" value={state.author} />
         <button
-          type="button"
-          onClick={handleSubmit}
+          type="submit" // changed from type="button" to type="submit"
         >
           Add Book
         </button>
