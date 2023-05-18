@@ -1,22 +1,60 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeBook } from '../redux/books/booksSlice';
+import { getBooks, deleteBook } from '../redux/books/booksSlice';
 
-function Books() {
-  const { books } = useSelector((store) => store.books);
+const Books = () => {
   const dispatch = useDispatch();
+  const { books, isLoading, error } = useSelector((store) => store.books);
+
+  useEffect(() => {
+    dispatch(getBooks());
+  }, [dispatch]);
+
+  if (isLoading) {
+    return (
+      <div>
+        <h1>Loading...</h1>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div>
+        {error.message}
+      </div>
+    );
+  }
+
+  if (books.length === 0) {
+    return (
+      <div>
+        <h1>No books found.</h1>
+      </div>
+    );
+  }
 
   return (
-    <div>
-      {books.map((book) => (
-        <div key={book.item_id}>
-          <h3>{book.title}</h3>
-          <p>{book.author}</p>
-          <button type="submit" onClick={() => { dispatch(removeBook(book.item_id)); }}>Remove</button>
-        </div>
-      ))}
-    </div>
+    <>
+      <ul>
+        {books.map((book) => (
+          <li key={book.item_id}>
+            <p>{book.author}</p>
+            <p>{book.title}</p>
+            <p>{book.category}</p>
+            <button
+              type="button"
+              onClick={() => {
+                dispatch(deleteBook(book.item_id));
+              }}
+            >
+              Remove
+            </button>
+          </li>
+        ))}
+      </ul>
+    </>
   );
-}
+};
 
 export default Books;
