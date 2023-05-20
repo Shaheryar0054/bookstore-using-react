@@ -49,7 +49,7 @@ body {
   padding: 13px;
   border-radius: 24rem;
   color: #0290ff;
-  margin-left: 77rem;
+  margin-left: 55rem;
   cursor: pointer;
 }
 
@@ -116,7 +116,7 @@ body {
 }
 
 .book-title {
-  width: 55.5rem;
+  width: 32.5rem;
   height: 1.23rem;
   margin: 1.188rem 2.125rem 0 0;
   padding: 13px 40px;
