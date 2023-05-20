@@ -36,18 +36,19 @@ const Form = () => {
   };
 
   return (
-    <>
+    <div id="form-container">
       <h3>ADD NEW BOOK</h3>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Book title" onChange={handleChange} name="title" value={state.title} />
-        <input type="text" placeholder="Author" onChange={handleChange} name="author" value={state.author} />
+        <input className="book-title" type="text" placeholder="Book title" onChange={handleChange} name="title" value={state.title} />
+        <input className="input-author" type="text" placeholder="Author" onChange={handleChange} name="author" value={state.author} />
         <button
+          className="submit-btn"
           type="submit" // changed from type="button" to type="submit"
         >
           Add Book
         </button>
       </form>
-    </>
+    </div>
   );
 };
 
