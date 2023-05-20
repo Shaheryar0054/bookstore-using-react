@@ -21,7 +21,7 @@ export default function Navbar() {
         <h1>Bookstore CMS</h1>
         <ul id="pages-container">
           <li>
-            <Link className="Books" style={{ textDecoration: 'none' }} to="/">Books</Link>
+            <Link className="Books" style={{ textDecoration: 'none' }} to="/">BOOKS</Link>
           </li>
           <li>
             <Link className="Categories" style={{ textDecoration: 'none' }} to="/Categories">CATEGORIES</Link>

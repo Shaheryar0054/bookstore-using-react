@@ -46,6 +46,7 @@ const Books = () => {
               <p className="author">{book.author}</p>
               <div id="all-btn">
                 <button type="button" className="comments">Comments</button>
+                <span className="line-1" />
                 <button
                   className="remove"
                   type="button"
@@ -55,6 +56,7 @@ const Books = () => {
                 >
                   Remove
                 </button>
+                <span className="line-1" />
                 <button type="button" className="Edit">Edit</button>
               </div>
             </div>

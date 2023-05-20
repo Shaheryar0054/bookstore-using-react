@@ -45,11 +45,12 @@ body {
 }
 
 .user-icon {
-  border: 1px solid black;
+  border: 1px solid #e8e8e8;
   padding: 13px;
   border-radius: 24rem;
   color: #0290ff;
   margin-left: 77rem;
+  cursor: pointer;
 }
 
 .Books {
@@ -75,8 +76,9 @@ body {
   cursor: pointer;
 }
 
-#all-btn .comments {
-  border-right: 1px solid black;
+.line-1 {
+  height: 1.5rem;
+  border: solid 1px #f5f6fa;
 }
 
 .category {
@@ -86,10 +88,6 @@ body {
   font-size: 0.875rem;
   font-weight: bold;
   color: #121212;
-}
-
-#all-btn .remove {
-  border-right: 1px solid black;
 }
 
 .author {
@@ -160,8 +158,8 @@ body {
   width: 4rem;
   height: 4rem;
   background-color: #fff;
-  border-bottom-color: rgb(175, 175, 175);
-  transform: rotate(240deg);
+  border-bottom-color: rgb(225 225 225);
+  transform: rotate(135deg);
 }
 
 .percentage-circle {
@@ -208,6 +206,7 @@ body {
   border: none;
   color: white;
   padding: 10px 36px;
+  cursor: pointer;
 }
 
 .loading {
